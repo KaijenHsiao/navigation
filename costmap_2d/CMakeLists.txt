@@ -163,25 +163,25 @@ if(CATKIN_ENABLE_TESTING)
   link_directories(${GTEST_LIBRARY_DIRS})
 
   # Create targets for test executables
-  add_executable(costmap_tester EXCLUDE_FROM_ALL test/costmap_tester.cpp)
-  add_dependencies(tests costmap_tester)
-  target_link_libraries(costmap_tester costmap_2d ${GTEST_LIBRARIES})
+  #add_executable(costmap_tester EXCLUDE_FROM_ALL test/costmap_tester.cpp)
+  #add_dependencies(tests costmap_tester)
+  #target_link_libraries(costmap_tester costmap_2d ${GTEST_LIBRARIES})
 
-  add_executable(footprint_tests EXCLUDE_FROM_ALL test/footprint_tests.cpp)
-  add_dependencies(tests footprint_tests)
-  target_link_libraries(footprint_tests costmap_2d ${GTEST_LIBRARIES})
+  #add_executable(footprint_tests EXCLUDE_FROM_ALL test/footprint_tests.cpp)
+  #add_dependencies(tests footprint_tests)
+  #target_link_libraries(footprint_tests costmap_2d ${GTEST_LIBRARIES})
 
   add_executable(obstacle_tests EXCLUDE_FROM_ALL test/obstacle_tests.cpp)
   add_dependencies(tests obstacle_tests)
   target_link_libraries(obstacle_tests costmap_2d layers ${GTEST_LIBRARIES})
 
-  add_executable(static_tests EXCLUDE_FROM_ALL test/static_tests.cpp)
-  add_dependencies(tests static_tests)
-  target_link_libraries(static_tests costmap_2d layers ${GTEST_LIBRARIES})
+  #add_executable(static_tests EXCLUDE_FROM_ALL test/static_tests.cpp)
+  #add_dependencies(tests static_tests)
+  #target_link_libraries(static_tests costmap_2d layers ${GTEST_LIBRARIES})
 
-  add_executable(inflation_tests EXCLUDE_FROM_ALL test/inflation_tests.cpp)
-  add_dependencies(tests inflation_tests)
-  target_link_libraries(inflation_tests costmap_2d layers ${GTEST_LIBRARIES})
+  #add_executable(inflation_tests EXCLUDE_FROM_ALL test/inflation_tests.cpp)
+  #add_dependencies(tests inflation_tests)
+  #target_link_libraries(inflation_tests costmap_2d layers ${GTEST_LIBRARIES})
 
   add_executable(voxel_tests EXCLUDE_FROM_ALL test/voxel_tests.cpp)
   add_dependencies(tests voxel_tests)
@@ -196,15 +196,15 @@ if(CATKIN_ENABLE_TESTING)
     DESTINATION ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/test
     MD5 e66b17ee374f2d7657972efcb3e2e4f7)
 
-  add_rostest(test/footprint_tests.launch)
-  add_rostest(test/inflation_tests.launch)
-  add_rostest(test/obstacle_tests.launch)
-  add_rostest(test/simple_driving_test.xml)
-  add_rostest(test/static_tests.launch)
+  #add_rostest(test/footprint_tests.launch)
+  #add_rostest(test/inflation_tests.launch)
+  #add_rostest(test/obstacle_tests.launch)
+  #add_rostest(test/simple_driving_test.xml)
+  #add_rostest(test/static_tests.launch)
   add_rostest(test/voxel_tests.launch)
 
-  catkin_add_gtest(array_parser_test test/array_parser_test.cpp)
-  target_link_libraries(array_parser_test costmap_2d)
+  #catkin_add_gtest(array_parser_test test/array_parser_test.cpp)
+  #target_link_libraries(array_parser_test costmap_2d)
 endif()
 
 install( TARGETS

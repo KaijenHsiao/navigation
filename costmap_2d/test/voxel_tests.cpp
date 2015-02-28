@@ -38,6 +38,7 @@
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 #include <costmap_2d/voxel_layer.h>
+#include <costmap_2d/obstacle_layer.h>
 #include <costmap_2d/testing_helper.h>
 #include <tf/transform_listener.h>
 
@@ -93,6 +94,38 @@ int lethal_count = countValues(*(layers.getCostmap()), LETHAL_OBSTACLE);
   ASSERT_EQ(lethal_count, 21);  
 }
 
+/**
+ * Test for resetOldCosts
+ */
+ 
+TEST(costmap, resetOldCosts){
+  tf::TransformListener tf;
+
+  LayeredCostmap layers("frame", false, false);  // Not rolling window, not tracking unknown
+  addStaticLayer(layers, tf);  // This adds the static map
+  //VoxelLayer* vlayer = addVoxelLayer(layers, tf);
+  addVoxelLayer(layers, tf);
+
+  //pluginlib::ClassLoader<Layer> plugin_loader_;
+  //boost::shared_ptr<Layer> plugin = plugin_loader_.createInstance(type);
+  //layered_costmap_->addPlugin(plugin);
+  
+  //costmap_2d::VoxelLayer* vlayer = new costmap_2d::VoxelLayer();
+  //vlayer->initialize(&layers, "voxels", &tf);
+  //layers.addPlugin( boost::shared_ptr<costmap_2d::Layer>(vlayer) );
+
+  // Add a point at 0, 0, 0
+  //addObservation(vlayer, 0.0, 0.0, MAX_Z/2, 0, 0, MAX_Z/2);
+
+  // This actually puts the LETHAL (254) point in the costmap at (0,0)
+  //layers.updateMap(0,0,0);  // 0, 0, 0 is robot pose
+  //printMap(*(layers.getCostmap()));
+  
+  //int lethal_count = countValues(*(layers.getCostmap()), LETHAL_OBSTACLE);
+
+  // We expect just one obstacle to be added (20 in static map)
+  //ASSERT_EQ(lethal_count, 21);
+}
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "voxel_tests");
