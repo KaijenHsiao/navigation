@@ -1,0 +1,5 @@
+<launch>
+  <node name="ms" pkg="map_server" type="map_server" args="$(find costmap_2d)/test/TenByTen.yaml"/>
+  <node name="voxel_tests" pkg="costmap_2d" type="test_voxel_layer" output="screen"/>
+
+</launch>

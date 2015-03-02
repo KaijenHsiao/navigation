@@ -75,12 +75,9 @@ costmap_2d::ObstacleLayer* addObstacleLayer(costmap_2d::LayeredCostmap& layers, 
 
 costmap_2d::VoxelLayer* addVoxelLayer(costmap_2d::LayeredCostmap& layers, tf::TransformListener& tf)
 {
-  costmap_2d::VoxelLayer* vlayer;// = new costmap_2d::VoxelLayer();
-  //vlayer->initialize(&layers, "voxels", &tf);
-  boost::shared_ptr<costmap_2d::VoxelLayer> vpointer(new costmap_2d::VoxelLayer);  
-  //boost::shared_ptr<costmap_2d::Layer> vpointer(vlayer));
-  //layers.addPlugin( vpointer );
-  //layers.addPlugin( boost::shared_ptr<costmap_2d::Layer>(vlayer) );
+  costmap_2d::VoxelLayer* vlayer = new costmap_2d::VoxelLayer();
+  vlayer->initialize(&layers, "voxels", &tf);
+  layers.addPlugin( boost::shared_ptr<costmap_2d::Layer>(vlayer) );
   return vlayer;
 }
 

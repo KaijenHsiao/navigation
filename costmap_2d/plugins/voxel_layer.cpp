@@ -33,19 +33,24 @@ void VoxelLayer::onInitialize()
 
 void VoxelLayer::setupDynamicReconfigure(ros::NodeHandle& nh)
 {
-  dsrv_ = new dynamic_reconfigure::Server<costmap_2d::VoxelPluginConfig>(nh);
-  dynamic_reconfigure::Server<costmap_2d::VoxelPluginConfig>::CallbackType cb = boost::bind(
-      &VoxelLayer::reconfigureCB, this, _1, _2);
-  dsrv_->setCallback(cb);
+  std::cout << "running voxel_layer's setupDynamicReconfigure" << std::endl;
+  voxel_dsrv_ = new dynamic_reconfigure::Server<costmap_2d::VoxelPluginConfig>(nh);
+  dynamic_reconfigure::Server<costmap_2d::VoxelPluginConfig>::CallbackType cb = 
+      boost::bind(&VoxelLayer::reconfigureVoxelCB, this, _1, _2);
+  voxel_dsrv_->setCallback(cb);
 }
 
 VoxelLayer::~VoxelLayer()
 {
-  if(dsrv_)
-    delete dsrv_;
+  std::cout << "inside VoxelLayer destructor" << std::endl;
+  if(voxel_dsrv_){
+    std::cout << "destructing dynamic_reconfig server for VoxelLayer" << std::endl;
+    delete voxel_dsrv_;
+    voxel_dsrv_ = NULL;
+  } 
 }
 
-void VoxelLayer::reconfigureCB(costmap_2d::VoxelPluginConfig &config, uint32_t level)
+void VoxelLayer::reconfigureVoxelCB(costmap_2d::VoxelPluginConfig &config, uint32_t level)
 {
   enabled_ = config.enabled;
   max_obstacle_height_ = config.max_obstacle_height;

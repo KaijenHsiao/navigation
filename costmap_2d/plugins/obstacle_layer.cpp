@@ -198,12 +198,14 @@ void ObstacleLayer::onInitialize()
 
   }
 
+  dsrv_ = NULL;
   setupDynamicReconfigure(nh);
   footprint_layer_.initialize( layered_costmap_, name_ + "_footprint", tf_);
 }
 
 void ObstacleLayer::setupDynamicReconfigure(ros::NodeHandle& nh)
 {
+  std::cout << "running obstacle_layer's setupDynamicReconfigure" << std::endl;
   dsrv_ = new dynamic_reconfigure::Server<costmap_2d::ObstaclePluginConfig>(nh);
   dynamic_reconfigure::Server<costmap_2d::ObstaclePluginConfig>::CallbackType cb = boost::bind(
       &ObstacleLayer::reconfigureCB, this, _1, _2);
@@ -212,8 +214,14 @@ void ObstacleLayer::setupDynamicReconfigure(ros::NodeHandle& nh)
 
 ObstacleLayer::~ObstacleLayer()
 {
-    if(dsrv_)
-        delete dsrv_;
+  std::cout << "inside ObstacleLayer destructor" << std::endl;
+  if(dsrv_){
+    std::cout << "destructing dynamic_reconfig server for ObstacleLayer" << std::endl;
+    delete dsrv_;
+  }
+  else{
+    std::cout << "dsrv_ was NULL" << std::endl;
+  }
 }
 void ObstacleLayer::reconfigureCB(costmap_2d::ObstaclePluginConfig &config, uint32_t level)
 {

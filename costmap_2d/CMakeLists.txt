@@ -150,6 +150,11 @@ target_link_libraries(costmap_2d_node
     costmap_2d
     )
 
+add_executable(test_voxel_layer src/test_voxel_layer.cpp)
+target_link_libraries(test_voxel_layer
+    costmap_2d layers
+    )
+
 ## Configure Tests
 if(CATKIN_ENABLE_TESTING)
   # Find package test dependencies
@@ -211,6 +216,7 @@ install( TARGETS
     costmap_2d_markers
     costmap_2d_cloud
     costmap_2d_node
+    test_voxel_layer
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

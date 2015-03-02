@@ -170,12 +170,12 @@ private:
   void resetOldCosts(double* min_x, double* min_y, 
 		     double* max_x, double* max_y); 
 
-  void reconfigureCB(costmap_2d::VoxelPluginConfig &config, uint32_t level);
+  void reconfigureVoxelCB(costmap_2d::VoxelPluginConfig &config, uint32_t level);
   void clearNonLethal(double wx, double wy, double w_size_x, double w_size_y, bool clear_no_info);
   virtual void raytraceFreespace(const costmap_2d::Observation& clearing_observation, double* min_x, double* min_y,
                                  double* max_x, double* max_y);
 
-  dynamic_reconfigure::Server<costmap_2d::VoxelPluginConfig> *dsrv_;
+  dynamic_reconfigure::Server<costmap_2d::VoxelPluginConfig> *voxel_dsrv_;
 
   std::vector<CostMapList> new_obs_list; 
   //this needs to be maintained for each topic - since they can have different timeouts 

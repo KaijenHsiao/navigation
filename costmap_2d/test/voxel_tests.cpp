@@ -104,9 +104,10 @@ TEST(costmap, resetOldCosts){
   LayeredCostmap layers("frame", false, false);  // Not rolling window, not tracking unknown
   addStaticLayer(layers, tf);  // This adds the static map
   //VoxelLayer* vlayer = addVoxelLayer(layers, tf);
-  addVoxelLayer(layers, tf);
+  //addVoxelLayer(layers, tf);
+  //boost::shared_ptr<Layer> vlayer(new ObstacleLayer);
 
-  //pluginlib::ClassLoader<Layer> plugin_loader_;
+  //pluginlib::ClassLoader<Layer> plugin_loader;
   //boost::shared_ptr<Layer> plugin = plugin_loader_.createInstance(type);
   //layered_costmap_->addPlugin(plugin);
   
