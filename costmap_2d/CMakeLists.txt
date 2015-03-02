@@ -160,6 +160,10 @@ if(CATKIN_ENABLE_TESTING)
   add_dependencies(tests obstacle_tests)
   target_link_libraries(obstacle_tests costmap_2d layers ${GTEST_LIBRARIES})
 
+  add_executable(voxel_tests EXCLUDE_FROM_ALL test/voxel_tests.cpp)
+  add_dependencies(tests voxel_tests)
+  target_link_libraries(voxel_tests costmap_2d layers ${GTEST_LIBRARIES})
+
   add_executable(static_tests EXCLUDE_FROM_ALL test/static_tests.cpp)
   add_dependencies(tests static_tests)
   target_link_libraries(static_tests costmap_2d layers ${GTEST_LIBRARIES})
@@ -180,6 +184,7 @@ if(CATKIN_ENABLE_TESTING)
   add_rostest(test/footprint_tests.launch)
   add_rostest(test/inflation_tests.launch)
   add_rostest(test/obstacle_tests.launch)
+  add_rostest(test/voxel_tests.launch)
   add_rostest(test/simple_driving_test.xml)
   add_rostest(test/static_tests.launch)
 

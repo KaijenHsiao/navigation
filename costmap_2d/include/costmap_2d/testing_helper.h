@@ -5,6 +5,7 @@
 #include<costmap_2d/costmap_2d.h>
 #include <costmap_2d/static_layer.h>
 #include <costmap_2d/obstacle_layer.h>
+#include <costmap_2d/voxel_layer.h>
 #include <costmap_2d/inflation_layer.h>
 
 const double MAX_Z(1.0);
@@ -70,6 +71,14 @@ costmap_2d::ObstacleLayer* addObstacleLayer(costmap_2d::LayeredCostmap& layers, 
   olayer->initialize(&layers, "obstacles", &tf);
   layers.addPlugin( boost::shared_ptr<costmap_2d::Layer>(olayer) );
   return olayer;
+}
+
+costmap_2d::VoxelLayer* addVoxelLayer(costmap_2d::LayeredCostmap& layers, tf::TransformListener& tf)
+{
+  costmap_2d::VoxelLayer* vlayer = new costmap_2d::VoxelLayer();
+  vlayer->initialize(&layers, "voxels", &tf);
+  layers.addPlugin( boost::shared_ptr<costmap_2d::Layer>(vlayer) );
+  return vlayer;
 }
 
 void addObservation(costmap_2d::ObstacleLayer* olayer, double x, double y, double z=0.0, double ox=0.0, double oy=0.0, double oz=MAX_Z){
